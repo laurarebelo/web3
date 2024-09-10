@@ -51,7 +51,7 @@ describe("Game set up", () => {
   })
   it("doesn't start a new hand if no action is taken", () => {
     const hand = game.currentHand()
-    expect(game.currentHand()).toStrictEqual(hand)
+    expect(game.currentHand()).toBe(hand)
   })
   it("selects a random player as dealer", () => {
     const game: Game = createGame({players: ['a', 'b', 'c', 'd'], targetScore: 500, randomizer: () => 1})
@@ -96,7 +96,6 @@ describe("Playing a hand", () => {
   describe("when the hand is over", () => {
     const game = createGame(props)
     const hand = game.currentHand()!
-    hand.printEverything()
     hand.draw()
     hand.play(0)
     test("the setup is as expected", () => {
@@ -187,7 +186,6 @@ describe("ending the second hand", () => {
   const hand2 = game.currentHand()!
   hand2.play(0)
   const hand3 = game.currentHand()!
-  hand3.printEverything()
   hand3.play(0)
 
   test("set up is as expected", () => {
@@ -195,7 +193,6 @@ describe("ending the second hand", () => {
     expect(hand3).not.toBe(hand2)
     expect(hand3.hasEnded()).toBeTruthy()
     expect(hand3.winner()).toBe(0)
-    hand3.printEverything()
     expect(hand3.score()).toBe(143)
   })
   test("player 0 won", () => {

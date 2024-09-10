@@ -11,17 +11,16 @@ export type HandProps = {
   players: string[]
   dealer: number
   shuffler?: Shuffler<deck.Card>
-  cardsPerPlayer?: number,
-  onEndFunction?: Function
+  cardsPerPlayer?: number
 }
 
 export function createHand({
-  players,
-  dealer,
-  shuffler = standardShuffler,
-  cardsPerPlayer = 7
-}: HandProps): hand.Hand {
-  return hand.Hand.createHand({players, dealer, shuffler, cardsPerPlayer})
+    players, 
+    dealer, 
+    shuffler = standardShuffler,
+    cardsPerPlayer = 7
+  }: HandProps): hand.Hand {
+  return hand.Hand.createHand(players, dealer, shuffler, cardsPerPlayer)
 }
 
 export function createGame(props: Partial<uno.Props>): uno.Game {
