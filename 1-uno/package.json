@@ -1,0 +1,37 @@
+{
+  "name": "uno",
+  "version": "0.0.1",
+  "description": "Uno",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "jest __test__/model/**.ts",
+    "test-all": "npx jest __test__/model/deck.test.ts && npx jest __test__/model/hand.going.out.test.ts && npx jest __test__/model/hand.legal.plays.test.ts && npx jest __test__/model/hand.playing.test.ts && npx jest __test__/model/hand.start.test.ts && npx jest __test__/model/uno.test.ts",
+    "test-deck": "npx jest __test__/model/deck.test.ts",
+    "test-hand-out": "npx jest __test__/model/hand.going.out.test.ts",
+    "test-hand-legal": "npx jest __test__/model/hand.legal.plays.test.ts",
+    "test-hand-playing": "npx jest __test__/model/hand.playing.test.ts",
+    "test-hand-start": "npx jest __test__/model/hand.start.test.ts",
+    "test-uno": "npx jest __test__/model/uno.test.ts"
+  },
+  "keywords": [
+    "uno",
+    "oo",
+    "functional"
+  ],
+  "author": "Ole Ildsgaard Hougaard",
+  "license": "ISC",
+  "dependencies": {
+    "@babel/core": "^7.24.6",
+    "@babel/preset-env": "^7.24.6",
+    "@babel/preset-typescript": "^7.24.6",
+    "babel-jest": "^29.7.0",
+    "jest": "^29.7.0",
+    "ts-loader": "^9.5.1",
+    "typescript": "^5.4.5"
+  },
+  "devDependencies": {
+    "@babel/node": "^7.25.0",
+    "ts-jest": "^29.2.5"
+  }
+}
