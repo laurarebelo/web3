@@ -12,11 +12,11 @@ export class Hand {
     cardsPerPlayer: number
     private theDrawPile!: Deck
     private currPlayer: number | undefined
-    private unoJustCaught: boolean
-    private openUnoCatch: boolean
-    private handEnded: boolean
-    private winnerPlayer: number | undefined
-    private handScore: number | undefined
+    private unoJustCaught: boolean = false
+    private openUnoCatch: boolean = false
+    private handEnded: boolean = false
+    private winnerPlayer: number | undefined = undefined
+    private handScore: number | undefined = undefined
     private direction: number
     private onEndFunction?: Function
     private drewPlayableCard = false
@@ -29,11 +29,6 @@ export class Hand {
         this.cardsPerPlayer = cardsPerPlayer
         this.players = Hand.initializePlayers(players)
         this.serveCards()
-        this.unoJustCaught = false
-        this.openUnoCatch = false
-        this.handEnded = false
-        this.winnerPlayer = undefined
-        this.handScore = undefined
         this.onEndFunction = onEndCallback
     }
 
@@ -70,6 +65,7 @@ export class Hand {
         let startingCard = this.drawPile().deal()!
         if (startingCard.type.includes("WILD")) {
             this.serveCards();
+            return;
         }
         this.theDiscardPile.add(startingCard)
         this.currPlayer = this.dealer
@@ -99,14 +95,14 @@ export class Hand {
         return this.players[who]
     }
 
-    public static createHand(props: HandProps) {
-        if (props.players.length < 2) {
+    public static createHand(players: string[], dealer : number, shuffler?: Shuffler<Card>, cardsPerPlayer? : number, onEndFunction? : Function) {
+        if (players.length < 2) {
             throw new Error("Needs at least two players to play!")
         }
-        if (props.players.length > 10) {
+        if (players.length > 10) {
             throw new Error("Maximum number of players is 10!")
         }
-        const newHand = new Hand(props.players, props.dealer, props.shuffler, props.cardsPerPlayer, props.onEndFunction)
+        const newHand = new Hand(players, dealer, shuffler, cardsPerPlayer, onEndFunction)
         return newHand
     }
 

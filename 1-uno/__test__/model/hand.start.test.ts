@@ -70,12 +70,11 @@ describe("Hand set up", () => {
     }
   })
   it("reshuffles if the top of the discard pile is a wild card", () => {
-    const wildOnTop = shuffleBuilder().discard().is({type: 'WILD'}).build()
-    const wildNotOnTop = shuffleBuilder().discard().isnt({type: ['WILD', 'WILD DRAW']}).build()
+    const wildOnDiscardTop = shuffleBuilder().discard().is({type: 'WILD'}).build()
+    const wildNotOnTop = shuffleBuilder().top().isnt({type: ['WILD', 'WILD DRAW']}).build()
     const mockShuffler = jest.fn(wildNotOnTop)
-    const shuffler = successiveShufflers(wildOnTop, mockShuffler)
-    console.log(`creating hand for 13...`)
-    const hand = createHand({players: ['a', 'b', 'c', 'd'], dealer: 1, shuffler})
+    const shuffler = successiveShufflers(wildOnDiscardTop, mockShuffler)
+    createHand({players: ['a', 'b', 'c', 'd'], dealer: 1, shuffler})
     expect(mockShuffler).toBeCalledTimes(1)
   })
   it("keeps shuffling as long as the top of the discard pile is a wild card", () => {
@@ -88,10 +87,10 @@ describe("Hand set up", () => {
     expect(mockShuffler).toBeCalledTimes(1)
   })
   it("reshuffles if the top of the discard pile is a wild draw 4 card", () => {
-    const wildDrawOnTop = shuffleBuilder().discard().is({type: 'WILD DRAW'}).build()
-    const wildNotOnTop = shuffleBuilder().discard().isnt({type: ['WILD', 'WILD DRAW']}).build()
+    const wildDrawOnDiscardTop = shuffleBuilder().discard().is({type: 'WILD DRAW'}).build()
+    const wildNotOnTop = shuffleBuilder().top().isnt({type: ['WILD', 'WILD DRAW']}).build()
     const mockShuffler = jest.fn(wildNotOnTop)
-    const shuffler = successiveShufflers(wildDrawOnTop, mockShuffler)
+    const shuffler = successiveShufflers(wildDrawOnDiscardTop, mockShuffler)
     createHand({players: ['a', 'b', 'c', 'd'], dealer: 1, shuffler})
     expect(mockShuffler).toBeCalledTimes(1)
   })

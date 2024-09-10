@@ -69,7 +69,6 @@ describe("Legal plays", () => {
     it("is legal to play a card in the same color as the top card", () => {
       const shuffler = builder.hand(2).is({type: 'NUMBERED', color: 'BLUE'}).build()
       const hand: Hand = createHand({players: ['a', 'b', 'c', 'd'], dealer: 3, shuffler})
-      hand.printEverything()
       expect(hand.canPlay(0)).toBeTruthy()
     })
     it("is not legal to play a non-reverse card with different color than the top card", () => {
@@ -164,7 +163,6 @@ describe("Legal plays", () => {
     it("is legal to play a card in the same color as the top card", () => {
       const shuffler = builder.hand(1).is({type: 'NUMBERED', color: 'BLUE'}).build()
       const hand: Hand = createHand({players: ['a', 'b', 'c', 'd'], dealer: 3, shuffler})
-      hand.printEverything()
       expect(hand.canPlay(0)).toBeTruthy()
     })
     it("is not legal to play a non-skip card with different color than the top card", () => {
@@ -208,15 +206,13 @@ describe("Legal plays", () => {
     it("is illegal to play a wild draw 4 card if hand contains a card with matching color", () => {
       const shuffler = shuffleBuilder()
         .discard()
-          .is({type: 'NUMBERED', color: 'GREEN'})
-        .hand(0
-        ).is({type: 'WILD DRAW'}, {color: 'GREEN'})
+        .is({type: 'NUMBERED', color: 'GREEN'})
+        .hand(0).
+        is({type: 'WILD DRAW'}, {color: 'GREEN'})
         .build()
       const hand = createHand({players: ['a', 'b', 'c', 'd'], dealer: 3, shuffler})
-      hand.printEverything()
       expect(hand.canPlay(0)).toBeFalsy()
     })
-    
     it("is legal to play a wild draw 4 card if hand doesn't contain another playable card", () => {
       const shuffler = shuffleBuilder()
         .discard()

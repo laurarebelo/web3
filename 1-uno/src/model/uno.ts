@@ -28,13 +28,8 @@ export class Game {
     }
 
     public resetHand() {
-        this.hand = Hand.createHand({
-            players: this.playersStringArray,
-            dealer: this.dealer,
-            shuffler: this.shuffler,
-            cardsPerPlayer: this.cardsPerPlayer,
-            onEndFunction: this.onHandEnd.bind(this)
-        })
+        this.hand = Hand.createHand(this.playersStringArray,this.dealer,this.shuffler,this.cardsPerPlayer,this.onHandEnd.bind(this)
+        )
     }
 
     player(who: number): Player {
